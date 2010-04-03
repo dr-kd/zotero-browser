@@ -10,26 +10,29 @@
         <script src="static/js/jquery.jqote2.min.js" type="text/javascript"></script>
     </head>
     <body>
+        <h1>jQote2 Simple Demo</h1>
 
-<?sjs
-var z = Components.classes["@zotero.org/Zotero;1"] .getService(Components.interfaces.nsISupports).wrappedJSObject;
 
-var render_collection = function(coll) {
-    if (!coll) { 
-        coll = null; 
-    }
-    var collections = z.getCollections(coll);
-    document.writeln("<ul>");
-    for (c in collections) {
-        document.writeln('<li>' + '<a href="view_collection.sjs?name=' + encodeURI(collections[c].name) + '&id=' + collections[c].id + '">' + collections[c].name  + '</a></li>');
-        if (collections[c].hasChildCollections) {
-	   var childCol = render_collection(collections[c].id);
-        }
-    }   
-    document.writeln("</ul>");
-}
-render_collection();
-?>
-</ul>
-</body>
+<table id="example">
+<tr><th>Type</th><th>Date</th><th>Citation</th><th>Abstract</th>
+</table>
+
+<script type="text/html" id="template">
+    <![CDATA[
+<tr>
+  <td> <%= this.type %> </td>
+  <td> <%= this.date %> </td>
+  <td> <%= this.citation.html %> </td>
+  <td> <%= this.abstract %> </td>
+</tr>
+    ]]>
+</script>
+
+<script type="text/javascript">
+     var citation_data = <?sjs pow_include('get_collection_items.js'); ?> ; 
+    // let's do some jQote magic
+    $('#example').jqoteapp('#template', citation_data);
+</script>
+
+    </body>
 </html>
