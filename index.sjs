@@ -24,6 +24,7 @@ var render_collection = function(coll) {
         document.writeln("<li>" + collections[c].name + "</li>");
         if (collections[c].hasChildCollections) {
 	   var childCol = render_collection(collections[c]._id);
+	   var childCol = render_collection(collections[c].id);
         }
     }   
     document.writeln("</ul>");
