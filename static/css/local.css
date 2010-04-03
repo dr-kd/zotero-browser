@@ -1,0 +1,5 @@
+body { width: 80%; margin-left: 10% }
+table { border: 1px solid black; margin: 5px }
+tr { border-bottom: 1px solid blue; margin-left: 5px; margin-right: 5px }
+td { vertical-align: text-top; margin-top: 3px; }
+
