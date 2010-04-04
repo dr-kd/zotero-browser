@@ -22,7 +22,7 @@ https://addons.mozilla.org/en-US/firefox/addon/3002.
 
 Once POW is up and running, you can just put the files in this
 distribution in a subdirectory in POW's htdocs directory, visit
-relevant page (e.g. http://localhost:6670/zotero-browse/) and you're
+relevant page (e.g. http://localhost:6670/zotero-browser/) and you're
 good to go.
 
 Roadmap
