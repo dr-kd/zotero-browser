@@ -28,12 +28,16 @@ good to go.
 Roadmap
 =======
 
-At the moment, all the included script does is to list the collections in your
-library.  This will be followed by a easy to read report based on the
-jqote2 client side javascript template library
-(http://plugins.jquery.com/project/jqote2) after which we can start
-doing more interesting stuff (tagclouds of the fulltext from each
-collection might be interesting for example).
+At the moment, all the included scripts is:
+
+  - list the collections in your library.  
+  - A rather basic report of each question.  The report uses the jqote2 client side javascript template library (http://plugins.jquery.com/project/jqote2) which makes writing out data super easy if you have basic knowledge of HTML.
+
+Next up there's lots of potential for doing more interesting stuff -
+tagclouds based on the content of the fulltext stored for each item, a
+fulltext based browsable index, getting a JSON based web service up
+and running to distribute information about your bibliographies.  The
+possibilities are endless
 
 Source and contributions
 ========================
