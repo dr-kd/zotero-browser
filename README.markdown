@@ -33,7 +33,16 @@ At the moment, all the included scripts is:
   - list the collections in your library.  
   - A rather basic report of each question.  The report uses the jqote2 client side javascript template library (http://plugins.jquery.com/project/jqote2) which makes writing out data super easy if you have basic knowledge of HTML.
 
-Next up there's lots of potential for doing more interesting stuff -
+*Next Step*: Write an annotated bibliography browser.  Features are:
+
+ - Create annotated bibliography from collection and/or 1 or more tags.
+ - List abstracts, notes and related items under each bibliographic entry.
+ - List what each item has been tagged with.
+ - List what collections the item belongs in.
+ - Jquery magic to make these various lists hide/show for space efficiency.
+ - Clickable link for each item to highlight the relevant part of the zotero collection pane (like provided in the timeline view from within zotero).
+
+There's lots of potential for doing other interesting stuff -
 tagclouds based on the content of the fulltext stored for each item, a
 fulltext based browsable index, getting a JSON based web service up
 and running to distribute information about your bibliographies.  The
