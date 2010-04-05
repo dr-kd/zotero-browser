@@ -35,7 +35,8 @@ At the moment, all the included scripts is:
 
 *Next Step*: Write an annotated bibliography browser.  Features are:
 
- - Create annotated bibliography from collection and/or 1 or more tags. DONE but buggy for some data - not sure the exact problem here.
+ - Create annotated bibliography from collection and/or 1 or more tags. DONE
+ - Fix bug that makes collection annotated bibs not function.
  - List abstracts, notes and related items under each bibliographic entry. DONE
  - List what each item has been tagged with. 
  - List what collections the item belongs in.
