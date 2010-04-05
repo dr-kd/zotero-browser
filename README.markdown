@@ -62,6 +62,10 @@ You can get Native JSON support through firefox.  Here's the code required:
  var json_thing = json.encode(thing);
  var other_thing = json.decode(json_thing);
 
+Some of the markup in zotero is not terribly valid (I'm looking at you
+TinyMCE!).  This can cause havoc with the templating system jqote2.  To deal
+with any issues arising from this, you should escape(html) on the server, and
+unescape(html) on the client side in the template.
 
 Source and contributions
 ========================

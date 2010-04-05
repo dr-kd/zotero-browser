@@ -45,20 +45,21 @@ for (var i in items) {
     var qc = z.QuickCopy;
     var cite = qc.getContentFromItems(new Array(item),
         z.Prefs.get("export.quickCopy.setting"));
-    this_item.citation = cite;
+    this_item.citation = escape(cite.html);
     var abstract = item.getField('abstractNote');
-    this_item.abstract = abstract;
+    this_item.abstract = escape(abstract);
     this_item.notes = new Array;
     var notes = item.getNotes();
     if (notes) {
 	for (var j=0;j<notes.length;j++) {
 	    var thisnote = new Object;
-            thisnote.note = z.Items.get(notes[j]);
-            var related = thisnote.note._getRelatedItems(false);
+            var note = z.Items.get(notes[j]);
+            thisnote.note = escape(note._noteText);
+            var related = note._getRelatedItems(false);
 	    if (related) {
 		var rel_note = qc.getContentFromItems(related,
                     z.Prefs.get("export.quickCopy.setting"));
-		thisnote.rel_note;
+		thisnote.related = escape(rel_note.html);
             }
 	}
 	this_item.notes.push(thisnote);
@@ -66,7 +67,7 @@ for (var i in items) {
     var related_cite=item._getRelatedItems(false);
     var rel_cite = qc.getContentFromItems(related_cite,
         z.Prefs.get("export.quickCopy.setting"));
-    this_item.related = rel_cite;
+    this_item.related = escape(rel_cite.html);
     report.push(this_item);
 }
 document.writeln(json.encode(report));

@@ -20,18 +20,23 @@
 
 <script type="text/html" id="template">
     <![CDATA[
-<li><%= this.citation.html %> 
+<li><%= unescape(this.citation) %> 
 <ul id="info"> 
 <% if ( this.abstract ) { %>
-  <li><h3>Abstract</h3><%= this.abstract %> </li>
+  <li><h3>Abstract</h3><%= unescape(this.abstract) %> </li>
 <% } %>
 <% if ( this.notes ) { %>
-  <% for ( key in this.notes) %>
-            <li> <h4>Notes</h4> <%= this.notes[key].note._noteText %></li>
-            <% ; %>
+  <% for ( key in this.notes) { %>
+            <li> <h4>Notes</h4> <%= unescape(this.notes[key].note); %>
+              <% if (this.notes[key].related) {  %>
+              <ul> <li> <% unescape(this.notes[key].related) ; %> </li>
+              <% } %>
+            </li>
+            
+            <% ; } %>
 <% } %>
-<% if ( this.related.text ) { %>
-  <li> <h4>Related</h4> <%= this.related.html %> </li>
+<% if ( this.related ) { %>
+  <li> <h4>Related</h4> <%= unescape(this.related) %> </li>
 <% } %>
 </ul>
 
