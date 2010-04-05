@@ -35,9 +35,9 @@ At the moment, all the included scripts is:
 
 *Next Step*: Write an annotated bibliography browser.  Features are:
 
- - Create annotated bibliography from collection and/or 1 or more tags.
- - List abstracts, notes and related items under each bibliographic entry.
- - List what each item has been tagged with.
+ - Create annotated bibliography from collection and/or 1 or more tags. DONE but buggy for some data - not sure the exact problem here.
+ - List abstracts, notes and related items under each bibliographic entry. DONE
+ - List what each item has been tagged with. 
  - List what collections the item belongs in.
  - Jquery magic to make these various lists hide/show for space efficiency.
  - Clickable link for each item to highlight the relevant part of the zotero collection pane (like provided in the timeline view from within zotero).
