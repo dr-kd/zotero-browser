@@ -46,7 +46,22 @@ There's lots of potential for doing other interesting stuff -
 tagclouds based on the content of the fulltext stored for each item, a
 fulltext based browsable index, getting a JSON based web service up
 and running to distribute information about your bibliographies.  The
-possibilities are endless
+possibilities are endless.
+
+Tips and Tricks
+===============
+
+See annotated/index.sjs and annotated/lib/get_results.js for an
+implementation designed to get around the fact that POW doesn't pass
+arrays from GET requests properly.
+
+You can get Native JSON support through firefox.  Here's the code required:
+
+ var thing = {"this":"that","something":"else"}
+ var json = Components.classes["@mozilla.org/dom/json;1"].createInstance(Components.interfaces.nsIJSON);
+ var json_thing = json.encode(thing);
+ var other_thing = json.decode(json_thing);
+
 
 Source and contributions
 ========================
