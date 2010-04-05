@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
-        <title>Zotero ssj/jqote template demo</title>
+        <title>Collection Viewer</title>
 		<link rel="stylesheet" type="text/css" media="all" href="static/css/elastic.css" />
 		<link rel="stylesheet" type="text/css" media="all" href="static/css/local.css" />
 		<script src="static/js/jquery.js" type="text/javascript" language="javascript" charset="utf-8"></script>
@@ -10,7 +10,7 @@
         <script src="static/js/jquery.jqote2.min.js" type="text/javascript"></script>
     </head>
     <body>
-        <h1>jQote2 Simple Demo</h1>
+        <h1>Collection Viewer</h1>
 
 
 <table id="example">
