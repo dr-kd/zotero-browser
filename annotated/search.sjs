@@ -35,8 +35,8 @@
             
             <% ; } %>
 <% } %>
-<% if ( this.related ) { %>
-  <li> <h4>Related</h4> <%= unescape(this.related) %> </li>
+<% if ( this.related != '%3Cdiv%20class%3D%22zotero-notes%22/%3E' ) { %>
+  <li> <h4>Related: <%= this.related %> </h4>  <%= unescape(this.related) %> </li>
 <% } %>
 </ul>
 
