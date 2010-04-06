@@ -26,17 +26,16 @@ search.addCondition('joinMode', 'any');
 
 
 for (c in collectionSearch) {
-    search.addCondition('collectionID', 'is', collectionSearch[c].id);
+    search.addCondition('collectionID', 'is', collectionSearch[c]);
 }
 
 for (t in tagSearch) {
     search.addCondition('tag', 'is', t);
 }
 	
-	
+
 var results = search.search()
 var items = z.Items.get(results);
-
 var report = new Array;
 
 for (var i in items) {
