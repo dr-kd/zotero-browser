@@ -54,27 +54,26 @@ for (var i in items) {
 	    var thisnote = new Object;
             var note = z.Items.get(notes[j]);
             thisnote.note = escape(note._noteText);
-            var related = note._getRelatedItems(false);
+            var related = note._getRelatedItemsBidirectional();
 	    if (related) {
                 thisnote.related = getRelatedList(related);
             }
         }
 	this_item.notes.push(thisnote);
     }
-    var related_cite=item._getRelatedItems(false);
+    var related_cite=item._getRelatedItemsBidirectional();
     this_item.related = getRelatedList(related_cite);
     report.push(this_item);
 }
 document.writeln(json.encode(report));
 
-function getRelatedList (items) {
+function getRelatedList (itemIDs) {
     var qc = z.QuickCopy;
     var results = new Array;
-    for (i in items) {
+    for (i in itemIDs) {
+        var item = z.Items.get(itemIDs[i]);
         var result = new Object;
-	var cite = qc.getContentFromItems(items[i],
-            z.Prefs.get("export.quickCopy.setting"));
-	result.related = escape(cite.html);
+	result.related = escape(item.getField('title'));
         result.id = z.Items.getLibraryKeyHash(item);
         results.push(result);
     }
