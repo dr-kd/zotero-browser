@@ -24,7 +24,6 @@ var search = new z.Search();
 var items;
 search.addCondition('joinMode', 'any');
 
-
 for (c in collectionSearch) {
     search.addCondition('collectionID', 'is', collectionSearch[c]);
 }
@@ -32,7 +31,7 @@ for (c in collectionSearch) {
 for (t in tagSearch) {
     search.addCondition('tag', 'is', t);
 }
-	
+
 
 var results = search.search()
 var items = z.Items.get(results);
@@ -45,6 +44,7 @@ for (var i in items) {
     var cite = qc.getContentFromItems(new Array(item),
         z.Prefs.get("export.quickCopy.setting"));
     this_item.citation = escape(cite.html);
+    this_item.id = z.Items.getLibraryKeyHash(item);
     var abstract = item.getField('abstractNote');
     this_item.abstract = escape(abstract);
     this_item.notes = new Array;
@@ -56,17 +56,27 @@ for (var i in items) {
             thisnote.note = escape(note._noteText);
             var related = note._getRelatedItems(false);
 	    if (related) {
-		var rel_note = qc.getContentFromItems(related,
-                    z.Prefs.get("export.quickCopy.setting"));
-		thisnote.related = escape(rel_note.html);
+                thisnote.related = getRelatedList(related);
             }
-	}
+        }
 	this_item.notes.push(thisnote);
     }
     var related_cite=item._getRelatedItems(false);
-    var rel_cite = qc.getContentFromItems(related_cite,
-        z.Prefs.get("export.quickCopy.setting"));
-    this_item.related = escape(rel_cite.html);
+    this_item.related = getRelatedList(related_cite);
     report.push(this_item);
 }
 document.writeln(json.encode(report));
+
+function getRelatedList (items) {
+    var qc = z.QuickCopy;
+    var results = new Array;
+    for (i in items) {
+        var result = new Object;
+	var cite = qc.getContentFromItems(items[i],
+            z.Prefs.get("export.quickCopy.setting"));
+	result.related = escape(cite.html);
+        result.id = z.Items.getLibraryKeyHash(item);
+        results.push(result);
+    }
+    return results;
+}
