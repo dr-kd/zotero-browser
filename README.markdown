@@ -1,6 +1,11 @@
 Zotero Browser
 ==============
 
+**IMPORTANT** This currently will only work in Firefox 3.5 (3.5.9 is the most
+  recent version and will be supported with security fixes until August 2009)
+  due to upstream bugs with the POW web server.  You can obtain it from
+  [Here](http://www.mozilla.com/en-US/firefox/all-older.html).
+
 This is a web based browser for the Zotero bibliographic software
 (http://zotero.org). 
 
