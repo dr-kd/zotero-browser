@@ -1,60 +1,38 @@
 // Code stolen from http://gist.github.com/379397
 // get Zotero, ZoteroPane
-var Zotero = chromeWindow.Zotero;
-var ZoteroPane = chromeWindow.ZoteroPane;
+var Zotero = Components.classes["@zotero.org/Zotero;1"] .getService(Components.interfaces.nsISupports).wrappedJSObject;
+
+var ZoteroPane = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+    .getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow("navigator:browser").ZoteroPane;
+var json = Components.classes["@mozilla.org/dom/json;1"].createInstance(Components.interfaces.nsIJSON);
 
 //get first selected item
-var selection = ZoteroPane.getSelectedItems();
-var selected_item = selection[0];
-
-//output(selected_item);
-//output(Zotero);
-//output(ZoteroPane);
-
-
-// proced if selected item is neither a collection nor a note
-if ( !selected_item.isCollection() & !selected_item.isNote()) {
-
-// define item and attachment depeding on whether attachment or item is selected
-// doesn't really work because it's creating an error when an attachment is selected
-if (selected_item.isAttachment()) {
-item=Zotero.Items.get(selected_item._sourceItem);
-item_att=selected_item;
-
+var selected_items = ZoteroPane.getSelectedItems();
+for (var item in selected_items) {
+    var qc = Zotero.QuickCopy;
+    var cite = qc.getContentFromItems(new Array(selected_items[item]),
+        Zotero.Prefs.get("export.quickCopy.setting"));
+        //  this_item.citation = escape(cite.html);
+    document.writeln("<h2>" + cite.html + "</h2>");
+    document.writeln("<ul>");
+    // proced if selected item is neither a collection nor a note
+    if ( ! selected_items[item].isCollection() & ! selected_items[item].isNote()) {
+        if (selected_items[item].isAttachment()) {
+            // find out about attachment
+        }
+        if (selected_items[item].isRegularItem()) {
+            var attachments = selected_items[item].getAttachments(false);
+            for (a in attachments) {
+                var a_item = Zotero.Items.get(attachments[a]);
+                if (a_item.attachmentMIMEType == 'application/pdf') {
+                    var file = Zotero.Attachments.getStorageDirectory(attachments[a]);
+                    var path = new String(a_item.attachmentPath);
+                    document.writeln("<li><a href='file://" + file.path +"/" + path.replace(/^storage:/,'') + "'>pdf fulltext</a></li>");
+                }
+            }
+        }
+        document.writeln("</ul>");
+    }
 }
-if (selected_item.isRegularItem()) {
-item=selected_item;
-att_ids=item.getAttachments(false);
-//if (att_ids.length>1) exit();
-item_att=Zotero.Items.get(att_ids[0]);
-}
 
-// create citation key
-cite_key=createCitation(item);
 
-// get quotations from existing notes
-existing_highlights=getHighlightIDs(item);
-
-// launch application to extract highlighings from pdf
-startApplication(app_launch,item_att.getFile().path);
-
-// open text file and save notes in array
-notes=processTextfile();
-
-// process notes
-notes=processNote(notes, cite_key);
-
-// output notes - this is just to check
-output(notes);
-
-// check whether note alreadt exists and only add if it doesn't
-for (var i=0; i < notes.length; i++) {
-if(notes[i].length>2) {
-      
-var note_id=notes[i].slice(notes[i].indexOf(id));
-var note_id=note_id.slice(0,note_id.indexOf("\]"));
-
-var create_note=1;
-for (var k=0; k < existing_highlights.length; k++) {
-if (existing_highlights[k]==note_id) var create_note=0;
-}
