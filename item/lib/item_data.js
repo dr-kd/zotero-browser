@@ -6,7 +6,6 @@ var ZoteroPane = Components.classes["@mozilla.org/appshell/window-mediator;1"]
     .getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow("navigator:browser").ZoteroPane;
 var json = Components.classes["@mozilla.org/dom/json;1"].createInstance(Components.interfaces.nsIJSON);
 
-//get first selected item
 var selected_items = ZoteroPane.getSelectedItems();
 for (var item in selected_items) {
     var qc = Zotero.QuickCopy;
@@ -24,10 +23,10 @@ for (var item in selected_items) {
             var attachments = selected_items[item].getAttachments(false);
             for (a in attachments) {
                 var a_item = Zotero.Items.get(attachments[a]);
-                if (a_item.attachmentMIMEType == 'application/pdf') {
+                if (a_item.attachmentMIMEType == 'application/pdf' || a_item.attachmentMIMEType == 'text/html') {
                     var file = Zotero.Attachments.getStorageDirectory(attachments[a]);
                     var path = new String(a_item.attachmentPath);
-                    document.writeln("<li><a href='file://" + file.path +"/" + path.replace(/^storage:/,'') + "'>pdf fulltext</a></li>");
+                    document.writeln("<li>" + a_item.attachmentText  + "</li>");
                 }
             }
         }
