@@ -14,6 +14,7 @@
 <ul>
   <li><a href="view_collection">Collection Viewer</a></li>
   <li><a href="annotated">Annotated Bibliography Viewer</a></li>
+  <li><a href="item">Item Viewer</a> (fulltext tools under development)</li>
 </ul>
     </body>
 </html>
